@@ -1,6 +1,5 @@
 function Login() {
     return (
-      // JSX code for login form
    <div className="form">
      <form>
        <div className="input-container">
