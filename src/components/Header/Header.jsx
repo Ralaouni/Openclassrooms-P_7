@@ -4,9 +4,12 @@
  
 function Header() {
     return (
-        <nav>
+        <nav class="nav">
             <Link to="/">Accueil</Link>
-            <Link to="/Login">Login</Link>
+            <div>
+                <Link to="/Login">Login</Link>
+                <Link to="/Signin">Signin</Link>
+            </div>
         </nav>
     )
 }

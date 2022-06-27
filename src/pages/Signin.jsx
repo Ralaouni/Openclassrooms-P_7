@@ -1,6 +1,6 @@
 import logo from '../images/icon-left-font.png'
 
-function Login() {
+function Signin() {
     return (
   <div>
       <div>
@@ -17,7 +17,7 @@ function Login() {
          <input type="password" name="pass" required />
        </div>
        <div className="button-container">
-         <input type="submit" value="Login" />
+         <input type="submit" value="Sign in" />
        </div>
      </form>
    </div>
@@ -25,4 +25,4 @@ function Login() {
 )
 }
 
-export default Login;
+export default Signin;
