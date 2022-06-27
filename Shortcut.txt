@@ -1,0 +1,2 @@
+alt + k + ctrl = pour selectionner toute les mêmes occurences
+alt + k = va passer au prochain même mot
