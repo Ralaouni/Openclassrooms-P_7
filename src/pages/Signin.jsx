@@ -16,6 +16,14 @@ function Signin() {
          <label>Password </label>
          <input type="password" name="pass" required />
        </div>
+       <div className="input-container">
+         <label>Nom </label>
+         <input type="text" name="name" required />
+       </div>
+       <div className="input-container">
+         <label>Prénom  </label>
+         <input type="text" name="forename" required />
+       </div>
        <div className="button-container">
          <input type="submit" value="Sign in" />
        </div>
