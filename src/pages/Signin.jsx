@@ -24,6 +24,10 @@ function Signin() {
          <label>Prénom  </label>
          <input type="text" name="forename" required />
        </div>
+       <div className="input-container">
+         <label>Travail  </label>
+         <input type="text" name="travail" required />
+       </div>
        <div className="button-container">
          <input type="submit" value="Sign in" />
        </div>
