@@ -39,80 +39,172 @@
 
 // export default Signin;
 
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+
+
+// import React, { useState } from 'react';
+// import PropTypes from 'prop-types';
+// import logo from '../images/icon-left-font.png'
+
+// async function signupUser(credentials) {
+
+//  return fetch('http://localhost:8000/api/auth/signup', {
+
+//    method: 'POST',
+//    headers: {
+//      'Content-Type': 'application/json'
+//    },
+//    body: JSON.stringify(credentials)
+//  })
+//    .then(data => data.json())
+// }
+
+// export default function Signup({ setToken }) {
+
+//   const [email, setemail] = useState();
+
+//   const [password, setPassword] = useState();
+
+//   const handleSubmit = async e => {
+
+//     e.preventDefault();
+
+//     const token = await signupUser({
+//       email,
+//       password
+//     });
+
+//     setToken(token);
+
+//   }
+
+//   return(
+
+//     <div className="form">
+//       <div>
+//         <img src={logo} className="Login-logo" alt="logo" />
+//       </div>
+//       <h1>Please Sign Up</h1>
+//       <form onSubmit={handleSubmit}>
+//         <label className="input-container">
+//           <p>email</p>
+//           <input type="text" onChange={e => setemail(e.target.value)} />
+//         </label>
+//         <label className="input-container">
+//           <p>Password</p>
+//           <input type="password" onChange={e => setPassword(e.target.value)} />
+//         </label>
+//         <label className="input-container">
+//           <p>Nom</p>
+//           <input type="text"  />
+//         </label>
+//         <label className="input-container">
+//           <p>Prenom</p>
+//           <input type="text" />
+//         </label>
+//         <label className="input-container">
+//           <p>Job</p>
+//           <input type="text" />
+//         </label>
+//         <div className="button-container">
+//           <button type="submit">Submit</button>
+//         </div>
+//       </form>
+//     </div>
+//   )
+// }
+
+// Signup.propTypes = {
+
+//   setToken: PropTypes.func.isRequired
+
+// };
+
+import "../App.css";
+import { useState } from "react";
 import logo from '../images/icon-left-font.png'
+// import { set } from "mongoose";
 
-async function signupUser(credentials) {
+function App() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
+  const [forename, setForename] = useState("");
+  const [job, setJob] = useState("");
+  const [message, setMessage] = useState("");
 
- return fetch('http://localhost:8000/api/auth/signup', {
-
-   method: 'POST',
-   headers: {
-     'Content-Type': 'application/json'
-   },
-   body: JSON.stringify(credentials)
- })
-   .then(data => data.json())
-}
-
-export default function Signup({ setToken }) {
-
-  const [email, setemail] = useState();
-
-  const [password, setPassword] = useState();
-
-  const handleSubmit = async e => {
-
+  let handleSubmit = async (e) => {
     e.preventDefault();
+    try {
+      let res = await fetch("http://localhost:8000/api/auth/signup", {
+        method: "POST",
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: email,
+          password: password,
+          name: name,
+          forename: forename,
+          job: job,
+        }), 
+      });
+      // let resJson = await res.json();
+      if (res.status === 201) {
+        setEmail("");
+        setPassword("");
+        setName("");
+        setForename("");
+        setJob("");
+        setMessage("User created successfully");
+      } else {
+        setMessage("Some error occured");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
-    const token = await signupUser({
-      email,
-      password
-    });
-
-    setToken(token);
-    console.log(email)
-  }
-
-  return(
-
-    <div className="form">
+  return (
+    <div className="App">
       <div>
         <img src={logo} className="Login-logo" alt="logo" />
       </div>
-      <h1>Please Sign Up</h1>
       <form onSubmit={handleSubmit}>
-        <label className="input-container">
-          <p>email</p>
-          <input type="text" onChange={e => setemail(e.target.value)} />
-        </label>
-        <label className="input-container">
-          <p>Password</p>
-          <input type="password" onChange={e => setPassword(e.target.value)} />
-        </label>
-        <label className="input-container">
-          <p>Nom</p>
-          <input type="text"  />
-        </label>
-        <label className="input-container">
-          <p>email</p>
-          <input type="text" />
-        </label>
-        <label className="input-container">
-          <p>email</p>
-          <input type="text" />
-        </label>
-        <div className="button-container">
-          <button type="submit">Submit</button>
-        </div>
+        <input
+          type="text"
+          value={email}
+          placeholder="Email"
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <input
+          type="text"
+          value={password}
+          placeholder="Password"
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <input
+          type="text"
+          value={name}
+          placeholder="Name"
+          onChange={(e) => setName(e.target.value)}
+        />
+        <input
+          type="text"
+          value={forename}
+          placeholder="Forename"
+          onChange={(e) => setForename(e.target.value)}
+        />
+        <input
+          type="text"
+          value={job}
+          placeholder="Job"
+          onChange={(e) => setJob(e.target.value)}
+        />
+
+        <button type="submit">Sign Up</button>
+
+        <div className="message">{message ? <p>{message}</p> : null}</div>
       </form>
     </div>
-  )
+  );
 }
 
-Signup.propTypes = {
-
-  setToken: PropTypes.func.isRequired
-
-};
+export default App;
