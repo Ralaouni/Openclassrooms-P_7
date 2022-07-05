@@ -31,5 +31,4 @@ function addpost () {
   modify.setAttribute("type", "submit")
   modify.innerText = "Commenter"
   form.appendChild(modify)
-  
 }

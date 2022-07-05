@@ -8,6 +8,43 @@ function Home() {
   
   const [selectedImage, setSelectedImage] = useState(null);
   
+  // const [email, setEmail] = useState("");
+  // const [password, setPassword] = useState("");
+  // const [name, setName] = useState("");
+  // const [forename, setForename] = useState("");
+  // const [job, setJob] = useState("");
+  // const [message, setMessage] = useState("");
+
+  // let handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     let res = await fetch("http://localhost:8000/api/auth/signup", {
+  //       method: "POST",
+  //       headers: { 'Content-Type': 'application/json' },
+  //       body: JSON.stringify({
+  //         email: email,
+  //         password: password,
+  //         name: name,
+  //         forename: forename,
+  //         job: job,
+  //       }), 
+  //     });
+  //     // let resJson = await res.json();
+  //     if (res.status === 201) {
+  //       setEmail("");
+  //       setPassword("");
+  //       setName("");
+  //       setForename("");
+  //       setJob("");
+  //       setMessage("User created successfully");
+  //     } else {
+  //       setMessage("Some error occured");
+  //     }
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
+  
   return (
     <div className="Home">
     <div className="logo+nav">
@@ -35,9 +72,9 @@ function Home() {
           <div>
             {selectedImage && (
               <div>
-              <Image alt="not fount" width={"250px"} src={URL.createObjectURL(selectedImage)} />
-              <br />
-              <button onClick={()=>setSelectedImage(null)}>Remove</button>
+                <Image alt="not fount" width={"250px"} src={URL.createObjectURL(selectedImage)} />
+                <br />
+                <button onClick={()=>setSelectedImage(null)}>Remove</button>
               </div>
             )}
             <input
