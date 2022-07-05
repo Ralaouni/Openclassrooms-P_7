@@ -4,7 +4,7 @@
   background-color: #0095ff;
 }
 
-/* Login */
+/* Login / Sign in */
 .App {
   display: flex;
   justify-content: center;
@@ -42,7 +42,7 @@ button:hover {
   color: #36a936;
 }
 
-/* CSS */
+/* Bouton */
 .button-container input {
   background-color: #0095ff;
   border: 1px solid transparent;
@@ -85,41 +85,19 @@ button:hover {
 
 
 /* React */
-.App {
-  text-align: center;
-}
 
-.App-logo {
+.Home {
+  display: flex;
+}
+.home-header {
+  display: flex;
+}
+.Home-logo {
   height: 40vmin;
   pointer-events: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.home-menu {
+  width: 20%;
+  border-right: 5px;
 }

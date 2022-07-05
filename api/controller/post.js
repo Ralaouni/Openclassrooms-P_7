@@ -3,18 +3,18 @@ const Sauce = require('../models/post');
 const fs = require('fs');
 const jwt = require('jsonwebtoken');
 
-exports.createSauce = (req, res, next) => {
-    const sauceObject = JSON.parse(req.body.sauce);
-    delete sauceObject._id;
-    const sauce = new Sauce({
-      ...sauceObject,
+exports.createPost = (req, res, next) => {
+    const postObject = JSON.parse(req.body.post);
+    delete postObject._id;
+    const post = new Post({
+      ...postObject,
       likes: 0,
       dislikes: 0,
       usersLiked:[],
       usersDisliked: [],
       imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
     });
-    sauce.save()
+    post.save()
       .then(() => res.status(201).json({ message: 'Objet enregistré !'}))
       .catch(error => res.status(400).json({ error }));
 }

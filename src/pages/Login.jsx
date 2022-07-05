@@ -1,39 +1,13 @@
-// import logo from '../images/icon-left-font.png'
-
-// function Login() {
-//     return (
-//   <div>
-//       <div>
-//         <img src={logo} className="Login-logo" alt="logo" />
-//       </div>
-//   <div className="form">
-//     <form>
-//       <div className="input-container">
-//         <label>Email </label>
-//         <input type="email" name="email" required />
-//       </div>
-//       <div className="input-container">
-//         <label>Password </label>
-//         <input type="password" name="pass" required />
-//       </div>
-//       <div className="button-container">
-//         <input type="submit" value="Login" />
-//       </div>
-//     </form>
-//   </div>
-//   </div>
-// )
-// }
-
-// export default Login;
-
-
 import "../App.css";
 import { useState } from "react";
-import logo from '../images/icon-left-font.png'
+import { useNavigate } from "react-router-dom";
+import logo from '../images/icon-left-font.png';
 // import { set } from "mongoose";
 
+
+
 function App() {
+  const navigate = useNavigate()
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
@@ -50,10 +24,11 @@ function App() {
         }), 
       });
       // let resJson = await res.json();
-      if (res.status === 201) {
+      if (res.status === 200) {
         setEmail("");
         setPassword("");
         setMessage("User logged in successfully");
+        navigate("/")
       } else {
         setMessage("Some error occured");
       }
