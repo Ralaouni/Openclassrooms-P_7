@@ -22,6 +22,7 @@
     "proptypes": "^1.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-images-upload": "^1.2.8",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
     "react-validation": "^3.0.7",

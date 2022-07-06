@@ -1,6 +1,7 @@
 import { useState } from "react"
 import logo from '../images/icon-left-font.png';
 import '../App.css';
+import ImageUploader from 'react-images-upload';
 import { Image } from "react"
 
 
@@ -63,12 +64,7 @@ function Home() {
       <div id="post+create">
       <div className="create-Post">
         <form id="form-post">
-          <input
-            type="text"
-            value="text"
-            placeholder="text"
-            // onChange={(e) => setPassword(e.target.value)}
-          />
+        <textarea name="comment" rows="12" cols="35">Qu'avez vous envie de dire</textarea>
           <div>
             {selectedImage && (
               <div>
@@ -91,17 +87,11 @@ function Home() {
       </div>
       <div id="all-post">
       <article>
-        <img/>
+        {/* <img/> */}
         <h2>Nom Prénom</h2>
         <p>Text</p>
         <form>
-          <input
-            type="text"
-            value="text"
-            placeholder="text"
-            // onChange={(e) => setPassword(e.target.value)}
-          />
-          <button type="submit">Commenter</button>
+          <button type="submit">Supprimer</button>
           <button type="submit">Modifier (juste pour la personne ayant poster)</button>
         </form>
       </article>

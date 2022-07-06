@@ -121,10 +121,14 @@
 
 import "../App.css";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import logo from '../images/icon-left-font.png'
 // import { set } from "mongoose";
 
 function App() {
+
+  const navigate = useNavigate()
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
@@ -154,6 +158,7 @@ function App() {
         setForename("");
         setJob("");
         setMessage("User created successfully");
+        navigate("/")
       } else {
         setMessage("Some error occured");
       }
