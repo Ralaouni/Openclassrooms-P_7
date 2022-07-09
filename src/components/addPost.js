@@ -7,7 +7,7 @@ function addpost () {
   article.appendChild(image)
   
   const name = document.createElement("h2")
-  name.innerText = &{value.name} &{value.forename}
+  name.innerText = '&{value.name} &{value.forename}'
   article.appendChild(name)
   
   const text = document.createElement("p")

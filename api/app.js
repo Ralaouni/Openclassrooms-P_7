@@ -4,7 +4,7 @@ const app = express();
 
 const mongoose = require('mongoose');
 
-// const postRoutes = require ('./routes/post.js')
+const postRoutes = require ('./routes/post.js')
 const userRoutes = require ('./routes/user')
 
 mongoose.connect('mongodb+srv://P_7:sRPNiKBZzSVYpJVm@cluster0.e4tgk.mongodb.net/?retryWrites=true&w=majority',
@@ -23,7 +23,7 @@ app.use((req, res, next) => {
 });
 
 
-// app.use('/api/post', postRoutes)
+app.use('/api/post', postRoutes)
 app.use('/api/auth', userRoutes)
 
 

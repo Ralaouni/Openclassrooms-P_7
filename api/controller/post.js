@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken');
 
 exports.createPost = (req, res, next) => {
     const postObject = JSON.parse(req.body.post);
+    console.log("yo")
     delete postObject._id;
     const post = new Post({
       ...postObject,

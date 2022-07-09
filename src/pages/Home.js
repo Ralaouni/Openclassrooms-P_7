@@ -1,50 +1,38 @@
 import { useState } from "react"
 import logo from '../images/icon-left-font.png';
 import '../App.css';
-import ImageUploader from 'react-images-upload';
 import { Image } from "react"
 
 
 function Home() {
   
   const [selectedImage, setSelectedImage] = useState(null);
-  
-  // const [email, setEmail] = useState("");
-  // const [password, setPassword] = useState("");
-  // const [name, setName] = useState("");
-  // const [forename, setForename] = useState("");
-  // const [job, setJob] = useState("");
-  // const [message, setMessage] = useState("");
+  const [text, setText] = useState("");
+  const [message, setMessage] = useState("");
 
-  // let handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   try {
-  //     let res = await fetch("http://localhost:8000/api/auth/signup", {
-  //       method: "POST",
-  //       headers: { 'Content-Type': 'application/json' },
-  //       body: JSON.stringify({
-  //         email: email,
-  //         password: password,
-  //         name: name,
-  //         forename: forename,
-  //         job: job,
-  //       }), 
-  //     });
-  //     // let resJson = await res.json();
-  //     if (res.status === 201) {
-  //       setEmail("");
-  //       setPassword("");
-  //       setName("");
-  //       setForename("");
-  //       setJob("");
-  //       setMessage("User created successfully");
-  //     } else {
-  //       setMessage("Some error occured");
-  //     }
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
+  let postSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      let res = await fetch("http://localhost:8000/api/post/", {
+        method: "POST",
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          text: text,
+          image: selectedImage,
+        }), 
+      });
+      // let resJson = await res.json();
+      if (res.status === 201) {
+        setText("");
+        setSelectedImage(null);
+        setMessage("Post created successfully");
+      } else {
+        setMessage("Some error occured");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
   
   return (
     <div className="Home">
@@ -63,26 +51,30 @@ function Home() {
       </div>
       <div id="post+create">
       <div className="create-Post">
-        <form id="form-post">
-        <textarea name="comment" rows="12" cols="35">Qu'avez vous envie de dire</textarea>
-          <div>
-            {selectedImage && (
-              <div>
-                <Image alt="not fount" width={"250px"} src={URL.createObjectURL(selectedImage)} />
-                <br />
-                <button onClick={()=>setSelectedImage(null)}>Remove</button>
-              </div>
-            )}
-            <input
-              type="file"
-              name="myImage"
-              onChange={(event) => {
-                console.log(event.target.files[0]);
-                setSelectedImage(event.target.files[0]);
-              }}
-            />
-          </div>
+        <form id="form-post" onSubmit={postSubmit}>
+        <textarea value= {text} onChange={(e) => setText(e.target.value)} name="text" rows="12" cols="35">Exprimez-vous</textarea>
+        <div>
+          {selectedImage && (
+            <div>
+            <img alt="not fount" width={"250px"} src={URL.createObjectURL(selectedImage)} />
+            <br />
+            <button onClick={()=>setSelectedImage(null)}>Remove</button>
+            </div>
+          )}
+          <br />
+         
+          <br /> 
+          <input
+            type="file"
+            name="myImage"
+            onChange={(event) => {
+              console.log(event.target.files[0]);
+              setSelectedImage(event.target.files[0]);
+            }}
+          />
+        </div>
           <button type="submit">Post</button>
+          <div className="message">{message ? <p>{message}</p> : null}</div>
         </form>
       </div>
       <div id="all-post">
