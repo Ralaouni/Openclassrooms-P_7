@@ -1,30 +1,35 @@
 import { useState } from "react"
 import logo from '../images/icon-left-font.png';
 import '../App.css';
-import { Image } from "react"
+// import { Image } from "react"
 
 
 function Home() {
-  
-  const [selectedImage, setSelectedImage] = useState(null);
-  const [text, setText] = useState("");
+
+  const [image, setImage] = useState(null);
+  const [post, setPost] = useState("");
   const [message, setMessage] = useState("");
 
+  const formData = new FormData();
+  formData.append("post", post);
+  formData.append("image", image);
+  
   let postSubmit = async (e) => {
     e.preventDefault();
     try {
+      console.log(formData.get("post"))
       let res = await fetch("http://localhost:8000/api/post/", {
         method: "POST",
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          text: text,
-          image: selectedImage,
-        }), 
+        Accept: "application/json",
+        headers: { 
+          'Accept': 'multipart/form-data'
+        },
+        body: formData
       });
       // let resJson = await res.json();
       if (res.status === 201) {
-        setText("");
-        setSelectedImage(null);
+        setPost("");
+        setImage(null);
         setMessage("Post created successfully");
       } else {
         setMessage("Some error occured");
@@ -33,7 +38,7 @@ function Home() {
       console.log(err);
     }
   };
-  
+
   return (
     <div className="Home">
     <div className="logo+nav">
@@ -52,13 +57,13 @@ function Home() {
       <div id="post+create">
       <div className="create-Post">
         <form id="form-post" onSubmit={postSubmit}>
-        <textarea value= {text} onChange={(e) => setText(e.target.value)} name="text" rows="12" cols="35">Exprimez-vous</textarea>
-        <div>
-          {selectedImage && (
+        <textarea value= {post} onChange={(e) => setPost(e.target.value)} name="post" rows="12" cols="35">Exprimez-vous</textarea>
+        <div >
+          {image && (
             <div>
-            <img alt="not fount" width={"250px"} src={URL.createObjectURL(selectedImage)} />
+            <img alt="not fount" width={"250px"} src={URL.createObjectURL(image)} />
             <br />
-            <button onClick={()=>setSelectedImage(null)}>Remove</button>
+            <button onClick={()=>setImage(null)}>Remove</button>
             </div>
           )}
           <br />
@@ -66,10 +71,10 @@ function Home() {
           <br /> 
           <input
             type="file"
-            name="myImage"
+            name="myimage"
             onChange={(event) => {
               console.log(event.target.files[0]);
-              setSelectedImage(event.target.files[0]);
+              setImage(event.target.files[0]);
             }}
           />
         </div>

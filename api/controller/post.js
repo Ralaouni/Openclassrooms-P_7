@@ -4,8 +4,8 @@ const fs = require('fs');
 const jwt = require('jsonwebtoken');
 
 exports.createPost = (req, res, next) => {
-    const postObject = JSON.parse(req.body.post);
-    console.log("yo")
+    console.log(req.body.post)
+    const postObject = req.body.post;
     delete postObject._id;
     const post = new Post({
       ...postObject,
@@ -15,6 +15,7 @@ exports.createPost = (req, res, next) => {
       usersDisliked: [],
       imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
     });
+    console.log(post.imageUrl)
     post.save()
       .then(() => res.status(201).json({ message: 'Objet enregistré !'}))
       .catch(error => res.status(400).json({ error }));
