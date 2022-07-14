@@ -23,7 +23,6 @@ exports.signup = (req, res, next) => {
 };
 
 exports.login = (req, res, next) => {
-    
     User.findOne({ email: req.body.email })
       .then(user => {
         if (!user) {
@@ -47,3 +46,21 @@ exports.login = (req, res, next) => {
       })
       .catch(error => res.status(500).json({ error }));
   };
+
+// exports.token = (req, res) => {
+//     const id = req.auth.userId;
+//     var condition = { id: id };
+//     User.findAll({
+//       attributes: ["id", "admin", "email", "name", "lastname", "imgUrl", "job"],
+//       where: condition,
+//     })
+//       .then((data) => {
+//         res.send(data);
+//       })
+//       .catch((err) => {
+//         res.status(500).send({
+//           message:
+//             err.message || "Some error occurred while retrieving tutorials.",
+//         });
+//       });
+//   };

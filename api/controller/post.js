@@ -4,7 +4,6 @@ const fs = require('fs');
 const jwt = require('jsonwebtoken');
 
 exports.createPost = (req, res, next) => {
-    console.log(req.body.post)
     const postObject = req.body.post;
     delete postObject._id;
     const post = new Post({

@@ -5,8 +5,9 @@ import logo from '../images/icon-left-font.png';
 // import { set } from "mongoose";
 
 
-
 function App() {
+
+
   const navigate = useNavigate()
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -23,19 +24,22 @@ function App() {
           password: password,
         }), 
       });
-      // let resJson = await res.json();
+      let resJson = await res.json();
       if (res.status === 200) {
         setEmail("");
         setPassword("");
         setMessage("User logged in successfully");
         navigate("/")
+        return resJson;
       } else {
         setMessage("Some error occured");
       }
     } catch (err) {
       console.log(err);
     }
+    
   };
+  
 
   return (
     <div className="App">
@@ -64,4 +68,6 @@ function App() {
   );
 }
 
+
 export default App;
+
