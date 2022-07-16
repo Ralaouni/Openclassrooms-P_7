@@ -7,6 +7,7 @@ import logo from '../images/icon-left-font.png';
 
 function App() {
 
+  const credentials =[]
 
   const navigate = useNavigate()
   const [email, setEmail] = useState("");
@@ -30,7 +31,8 @@ function App() {
         setPassword("");
         setMessage("User logged in successfully");
         navigate("/")
-        return resJson;
+        credentials.push(resJson)
+        localStorage.setItem("credentials", JSON.stringify(credentials))
       } else {
         setMessage("Some error occured");
       }

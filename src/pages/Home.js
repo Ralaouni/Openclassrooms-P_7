@@ -1,13 +1,13 @@
 import { useState } from "react"
 import logo from '../images/icon-left-font.png';
 import '../App.css';
-import App from './Login'
 // import { Image } from "react"
 
 
 function Home() {
 
-  console.log(App)
+  let credentials = localStorage.credentials
+
 
   const [image, setImage] = useState(null);
   const [post, setPost] = useState("");
@@ -17,6 +17,7 @@ function Home() {
   const formData = new FormData();
   formData.append("post", post);
   formData.append("image", image);
+  formData.append("credentials", credentials)
 
   let postSubmit = async (e) => {
     e.preventDefault();
@@ -24,8 +25,9 @@ function Home() {
       let res = await fetch("http://localhost:8000/api/post/", {
         method: "POST",
         Accept: "application/json",
-        headers: { 
-          'Authorization':'credentials',
+        headers:
+        { 
+          'authorization':'credenteials',
           'Accept': 'multipart/form-data'
         },
         body: formData
