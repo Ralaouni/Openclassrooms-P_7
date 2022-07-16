@@ -1,11 +1,15 @@
 import { useState } from "react"
 import logo from '../images/icon-left-font.png';
 import '../App.css';
+import allposts from '../components/addPost.js'
+
 // import { Image } from "react"
 
 
 function Home() {
 
+  allposts()
+  
   let credentials = localStorage.credentials
 
 
@@ -79,7 +83,6 @@ function Home() {
             type="file"
             name="myimage"
             onChange={(event) => {
-              console.log(event.target.files[0]);
               setImage(event.target.files[0]);
             }}
           />

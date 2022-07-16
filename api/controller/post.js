@@ -5,7 +5,6 @@ const jwt = require('jsonwebtoken');
 
 exports.createPost = (req, res, next) => {
     const credentials = JSON.parse(req.body.credentials)
-    // delete postObject._id;
     const post = new Post({
       userId:credentials[0].userId,
       post:req.body.post,
@@ -15,7 +14,6 @@ exports.createPost = (req, res, next) => {
       usersDisliked: [],
       imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
     });
-    console.log(post)
     post.save()
       .then(() => res.status(201).json({ message: 'Objet enregistré !'}))
       .catch(error => res.status(400).json({ error }));
@@ -82,7 +80,6 @@ exports.getAllPost = (req, res, next) => {
 exports.likePost = (req, res, next ) => {
   Post.findOne({ _id: req.params.id})
     .then(post => {
-      console.log(req.body)
       if (req.body.like === 1) {
         post.likes +=1
         post.usersLiked.push(req.body.userId)

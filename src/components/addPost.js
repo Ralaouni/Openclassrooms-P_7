@@ -1,4 +1,17 @@
-// function addpost () {
+function allposts () {
+    fetch("http://localhost:8000/api/post/")
+    .then(function(res){
+      // console.log('ass')
+      // if (res.ok) {
+      //   return res.json
+      // }
+    })
+  // .catch(function(err){
+  //   console.log('une erreur est survenue')
+  // })
+}
+
+export default allposts
 //   const article = document.createElement("article")
 //   article.setAttribute("class","post")
 //   all-post.appendChild(article)
