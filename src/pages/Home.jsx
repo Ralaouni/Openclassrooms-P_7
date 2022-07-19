@@ -1,13 +1,20 @@
+import { React} from "react"
 import { useState } from "react"
 import logo from '../images/icon-left-font.png';
 import '../App.css';
+import AddOneposts from "../components/addOnePost";
+
+
+
 // import { Image } from "react"
 
 
-function Home() {
 
+function Home() {
+  
   let credentials = localStorage.credentials
 
+  console.log("ass")
 
   const [image, setImage] = useState(null);
   const [post, setPost] = useState("");
@@ -27,7 +34,7 @@ function Home() {
         Accept: "application/json",
         headers:
         { 
-          'authorization':'credenteials',
+          'authorization':'credentials',
           'Accept': 'multipart/form-data'
         },
         body: formData
@@ -44,7 +51,7 @@ function Home() {
       console.log(err);
     }
   };
-
+  
   return (
     <div className="Home">
     <div className="logo+nav">
@@ -79,7 +86,6 @@ function Home() {
             type="file"
             name="myimage"
             onChange={(event) => {
-              console.log(event.target.files[0]);
               setImage(event.target.files[0]);
             }}
           />
@@ -89,15 +95,7 @@ function Home() {
         </form>
       </div>
       <div id="all-post">
-      <article>
-        {/* <img/> */}
-        <h2>Nom Prénom</h2>
-        <p>Text</p>
-        <form>
-          <button type="submit">Supprimer</button>
-          <button type="submit">Modifier (juste pour la personne ayant poster)</button>
-        </form>
-      </article>
+      <AddOneposts/>
       </div>
       </div>
     </div>

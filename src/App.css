@@ -16,7 +16,7 @@
   margin-right: auto;
   width: 70%;
 }
-input {
+.log-input {
   display: block;
   width: 20rem;
   height: 2rem;
@@ -25,7 +25,7 @@ input {
   font-weight: 500;
   margin-bottom: 2rem;
 }
-button {
+.log-button {
   border: none;
   padding: 1rem;
   width: 21.2rem;
@@ -33,7 +33,7 @@ button {
   border-radius: 0.2rem;
   cursor: pointer;
 }
-button:hover {
+.log-button:hover {
   background-color: #c5c5c5;
 }
 .message {
@@ -95,6 +95,29 @@ button:hover {
 .Home-logo {
   height: 40vmin;
   pointer-events: none;
+  
+}
+
+/* Posts */
+#all-post{
+  width: 80%;
+}
+article{
+  border: solid black 1px;
+}
+.all-names{
+  font-size: medium;
+}
+.job{
+  font-weight: bold;
+  font-size: 13px;
+}
+.like-dislike{
+  display: flex;
+  background-color: #0064bd;
+}
+.thumbs {
+  width: 25px;
 }
 
 .home-menu {

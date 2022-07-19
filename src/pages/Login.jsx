@@ -50,19 +50,21 @@ function App() {
       </div>
       <form onSubmit={handleSubmit}>
         <input
+          className="log-input"
           type="text"
           value={email}
           placeholder="Email"
           onChange={(e) => setEmail(e.target.value)}
         />
         <input
+          className="log-input"
           type="text"
           value={password}
           placeholder="Password"
           onChange={(e) => setPassword(e.target.value)}
         />
 
-        <button type="submit">Log In</button>
+        <button className="log-button" type="submit">Log In</button>
 
         <div className="message">{message ? <p>{message}</p> : null}</div>
       </form>

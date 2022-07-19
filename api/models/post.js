@@ -2,6 +2,9 @@ const mongoose = require('mongoose');
 
 const postSchema = mongoose.Schema({
     userId: { type: String, required: true },
+    name: { type: String, required: true },
+    forename: { type: String, required: true },
+    job: { type: String, required: true },
     post: { type: String, required: true },
     imageUrl: { type: String, required: false },
     likes: { type: Number, required: false },

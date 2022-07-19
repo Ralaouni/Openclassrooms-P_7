@@ -5,9 +5,11 @@ const jwt = require('jsonwebtoken');
 
 exports.createPost = (req, res, next) => {
     const credentials = JSON.parse(req.body.credentials)
-    // delete postObject._id;
     const post = new Post({
       userId:credentials[0].userId,
+      name:credentials[0].name,
+      forename:credentials[0].forename,
+      job:credentials[0].job,
       post:req.body.post,
       likes: 0,
       dislikes: 0,
@@ -15,7 +17,6 @@ exports.createPost = (req, res, next) => {
       usersDisliked: [],
       imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
     });
-    console.log(post)
     post.save()
       .then(() => res.status(201).json({ message: 'Objet enregistré !'}))
       .catch(error => res.status(400).json({ error }));
@@ -43,20 +44,21 @@ exports.modifyPost = (req, res, next) => {
 }
 
 exports.deletePost = (req, res, next) => {
+  console.log("delete api yo")
   Post.findOne({ _id: req.params.id })
     .then(post => {
-      const token = req.headers.authorization.split(' ')[1];
-      const decodedToken = jwt.verify(token, 'RANDOM_TOKEN_SECRET');
+      // const token = req.headers.authorization.split(' ')[1];
+      // const decodedToken = jwt.verify(token, 'RANDOM_TOKEN_SECRET');
       if (!post) {
         res.status(404).json({
           error: new Error('No such post!')
         });
       }
-      if (post.userId !== decodedToken.userId) {
-        res.status(400).json({
-          error: new Error('Unauthorized request!')
-        });
-      }
+      // if (post.userId !== decodedToken.userId) {
+      //   res.status(400).json({
+      //     error: new Error('Unauthorized request!')
+      //   });
+      // }
         const filename = post.imageUrl.split('/images/')[1];
         fs.unlink(`images/${filename}`, () => {
         Post.deleteOne({ _id: req.params.id })
@@ -82,7 +84,6 @@ exports.getAllPost = (req, res, next) => {
 exports.likePost = (req, res, next ) => {
   Post.findOne({ _id: req.params.id})
     .then(post => {
-      console.log(req.body)
       if (req.body.like === 1) {
         post.likes +=1
         post.usersLiked.push(req.body.userId)

@@ -14,7 +14,6 @@ exports.signup = (req, res, next) => {
           forename: req.body.forename,
           job:req.body.job
         });
-        console.log(user)
         user.save()
           .then(() => res.status(201).json({ message: 'Utilisateur créé !' }))
           .catch(error => res.status(400).json({ error }));
@@ -35,6 +34,9 @@ exports.login = (req, res, next) => {
             }
             res.status(200).json({
               userId: user._id,
+              name:user.name,
+              forename: user.forename,
+              job: user.job,
               token: jwt.sign(
                 { userId: user._id },
                 'RANDOM_TOKEN_SECRET',

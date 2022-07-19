@@ -173,38 +173,43 @@ function App() {
         <img src={logo} className="Login-logo" alt="logo" />
       </div>
       <form onSubmit={handleSubmit}>
-        <input
+        <input 
+          className="log-input"
           type="text"
           value={email}
           placeholder="Email"
           onChange={(e) => setEmail(e.target.value)}
         />
         <input
+          className="log-input"
           type="text"
           value={password}
           placeholder="Password"
           onChange={(e) => setPassword(e.target.value)}
         />
         <input
+          className="log-input"
           type="text"
           value={name}
           placeholder="Name"
           onChange={(e) => setName(e.target.value)}
         />
         <input
+          className="log-input"
           type="text"
           value={forename}
           placeholder="Forename"
           onChange={(e) => setForename(e.target.value)}
         />
         <input
+          className="log-input"
           type="text"
           value={job}
           placeholder="Job"
           onChange={(e) => setJob(e.target.value)}
         />
 
-        <button type="submit">Sign Up</button>
+        <button className="log-button"  type="submit">Sign Up</button>
 
         <div className="message">{message ? <p>{message}</p> : null}</div>
       </form>
