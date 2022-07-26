@@ -7,8 +7,6 @@ import logo from '../images/icon-left-font.png';
 
 function App() {
 
-  
-  const credentials =[]
 
   const navigate = useNavigate()
   const [email, setEmail] = useState("");
@@ -40,8 +38,7 @@ function App() {
         document.cookie=`forename=${resJson.forename}`
         document.cookie=`job=${resJson.job}`
         navigate("/")
-        credentials.push(resJson)
-        localStorage.setItem("credentials", JSON.stringify(credentials))
+        localStorage.setItem("token", resJson.token)
       } else {
         setMessage("Some error occured");
       }

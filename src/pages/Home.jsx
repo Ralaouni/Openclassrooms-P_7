@@ -19,7 +19,7 @@ function Home() {
   const [post, setPost] = useState("");
   const [message, setMessage] = useState("");
 
-  console.log(image)
+
 
 
   const formData = new FormData();
@@ -28,6 +28,8 @@ function Home() {
   formData.append("cookies", document.cookie)
 
   let postSubmit = async (e) => {
+    let date = new Date()
+    formData.append("date", date)
     try {
       let res = await fetch("http://localhost:8000/api/post/", {
         method: "POST",

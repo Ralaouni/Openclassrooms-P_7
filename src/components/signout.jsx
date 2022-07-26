@@ -1,5 +1,8 @@
 let Signout = () => {
     function deleteAllCookies() {
+
+        localStorage.clear()
+
         var cookies = document.cookie.split(";");
     
         for (var i = 0; i < cookies.length; i++) {

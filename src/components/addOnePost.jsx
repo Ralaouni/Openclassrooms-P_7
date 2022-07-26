@@ -11,6 +11,8 @@ import { faThumbsUp, faThumbsDown,} from '@fortawesome/free-solid-svg-icons';
 
 const  AddOneposts =  () => {
 
+  let date = Date().slice(0,10)
+
   const [data, setData] = useState ([])
 
   const userId = document.cookie.split('; ')
@@ -34,6 +36,12 @@ const  AddOneposts =  () => {
 
     {data.length !== 0 && data.map((posts,i) =>  {
 
+      let d = posts.date[0].slice(0,10)
+      let today = posts.date[0].slice(16,24)
+
+      console.log(date)
+      
+
       let PostDelete = () => {
         async function deletePost() {
             await fetch(`http://localhost:8000/api/post/${posts._id}`, { 
@@ -55,6 +63,17 @@ const  AddOneposts =  () => {
                 <form>
                      <h2 className="all-names">{posts.name}&nbsp;{posts.forename}</h2>
                      <h2 className="job">{posts.job}</h2>
+                     {(() => {
+                      if(date===d){
+                        return (
+                          <p className="post-date">{today}</p>
+                        )
+                      } else {
+                        return (
+                          <p className="post-date">{d}</p>
+                        )
+                      }
+                     })()}
                      <div>
                      <img className="posts-image" src={posts.imageUrl} alt=""/>
                      <p className="posts-text">{posts.post}</p>
