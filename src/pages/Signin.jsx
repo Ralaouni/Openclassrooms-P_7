@@ -150,7 +150,8 @@ function App() {
           job: job,
         }), 
       });
-      // let resJson = await res.json();
+      let resJson = await res.json();
+      console.log(resJson)
       if (res.status === 201) {
         setEmail("");
         setPassword("");
@@ -158,7 +159,7 @@ function App() {
         setForename("");
         setJob("");
         setMessage("User created successfully");
-        navigate("/")
+        navigate("/Login")
       } else {
         setMessage("Some error occured");
       }
@@ -167,12 +168,45 @@ function App() {
     }
   };
 
+  // let Loginfunction = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     let res = await fetch("http://localhost:8000/api/auth/login", {
+  //       method: "POST",
+  //       headers: { 
+  //         'Accept': 'application/json',
+  //         'Content-Type': 'application/json'
+  //       },
+  //       body: JSON.stringify({
+  //         email: email,
+  //         password: password,
+  //       }), 
+  //     });
+  //     let resJson = await res.json();
+  //     if (res.status === 200) {
+  //       setEmail("");
+  //       setPassword("");
+  //       setMessage("User logged in successfully");
+  //       document.cookie=`userId=${resJson.userId}`
+  //       document.cookie=`token=${resJson.token}`
+  //       document.cookie=`name=${resJson.name}`
+  //       document.cookie=`forename=${resJson.forename}`
+  //       document.cookie=`job=${resJson.job}`
+  //       navigate("/")
+  //     } else {
+  //       setMessage("Some error occured");
+  //     }
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
+
   return (
     <div className="App">
       <div>
         <img src={logo} className="Login-logo" alt="logo" />
       </div>
-      <form onSubmit={handleSubmit}>
+      <form className="log-form"  onSubmit={handleSubmit}>
         <input 
           className="log-input"
           type="text"

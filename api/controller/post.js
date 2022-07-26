@@ -2,49 +2,78 @@
 const Post = require('../models/post');
 const fs = require('fs');
 const jwt = require('jsonwebtoken');
+// const post = require('../models/post');
 
 exports.createPost = (req, res, next) => {
-    const credentials = JSON.parse(req.body.credentials)
+  const userId = req.body.cookies.split('; ')
+  .find(row => row.startsWith('userId'))
+  .split('=')[1]
+  const name = req.body.cookies.split('; ')
+  .find(row => row.startsWith('name'))
+  .split('=')[1]
+  const forename = req.body.cookies.split('; ')
+  .find(row => row.startsWith('forename'))
+  .split('=')[1]
+  const job = req.body.cookies.split('; ')
+  .find(row => row.startsWith('job'))
+  .split('=')[1]
     const post = new Post({
-      userId:credentials[0].userId,
-      name:credentials[0].name,
-      forename:credentials[0].forename,
-      job:credentials[0].job,
+      userId:userId,
+      name:name,
+      forename:forename,
+      job:job,
       post:req.body.post,
       likes: 0,
       dislikes: 0,
       usersLiked:[],
       usersDisliked: [],
-      imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
     });
+    if (req.file !== undefined) {
+      post.imageUrl=(`${req.protocol}://localhost:3000/images/${req.file.filename}`)
+    }
+    console.log(post)
+
     post.save()
       .then(() => res.status(201).json({ message: 'Objet enregistré !'}))
       .catch(error => res.status(400).json({ error }));
 }
 
 exports.modifyPost = (req, res, next) => {
+  console.log(req.body)
   Post.findOne({ _id: req.params.id })
-    const token = req.headers.authorization.split(' ')[1];
-    const decodedToken = jwt.verify(token, 'RANDOM_TOKEN_SECRET');
-    const Id = (JSON.parse(req.body.post)).userId
-    if (Id !== decodedToken.userId) {
-      res.status(400).json({
-        error: new Error('Unauthorized request!')
-      });
-    }
-      const postObject = req.file ?
-      {
-        ...JSON.parse(req.body.post),
-        imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
-      } : { ...req.body };
-      
+    // const token = req.headers.authorization.split(' ')[1];
+    // const decodedToken = jwt.verify(token, 'RANDOM_TOKEN_SECRET');
+    // const Id = (JSON.parse(req.body.post)).userId
+    // if (Id !== decodedToken.userId) {
+    //   res.status(400).json({
+    //     error: new Error('Unauthorized request!')
+    //   });
+    // }
+    .then(post => {
+      const postObject = {}
+      if (req.body.post === 'null') {
+        postObject.post = post.post
+      } else {
+        postObject.post = req.body.post
+      }
+      if (req.file !== undefined) {
+        postObject.imageUrl = `${req.protocol}://localhost:3000/images/${req.file.filename}`
+      } else if (post.imageUrl !== undefined && req.body.image === 'null'){
+        const filename = post.imageUrl.split('/images/')[1];
+        fs.unlink(`../public/images/${filename}`,(err) => {
+          if (err) {console.log(err)}
+          else {console.log("file deleted")}
+        })
+        postObject.imageUrl=''
+        console.log(post)
+      }
       Post.updateOne({ _id: req.params.id }, { ...postObject, _id: req.params.id })
       .then(() => res.status(200).json({ message: 'Objet modifié !'}))
+    })
       .catch(error => res.status(400).json({ error }));
 }
 
 exports.deletePost = (req, res, next) => {
-  console.log("delete api yo")
   Post.findOne({ _id: req.params.id })
     .then(post => {
       // const token = req.headers.authorization.split(' ')[1];
@@ -59,12 +88,18 @@ exports.deletePost = (req, res, next) => {
       //     error: new Error('Unauthorized request!')
       //   });
       // }
+      if (post.imageUrl !== undefined) {
         const filename = post.imageUrl.split('/images/')[1];
-        fs.unlink(`images/${filename}`, () => {
-        Post.deleteOne({ _id: req.params.id })
-          .then(() => res.status(200).json({ message: 'Objet supprimé !'}))
-          .catch(error => res.status(400).json({ error }));
+        fs.unlink(`../public/images/${filename}`, () => {
+            Post.deleteOne({ _id: req.params.id })
+              .then(() => res.status(200).json({ message: 'Objet supprimé !'}))
+              .catch(error => res.status(400).json({ error }));
       });
+      } else {
+        Post.deleteOne({ _id: req.params.id })
+              .then(() => res.status(200).json({ message: 'Objet supprimé !'}))
+              .catch(error => res.status(400).json({ error }));
+      }
     })
     .catch(error => res.status(500).json({ error }));
 };
@@ -82,28 +117,33 @@ exports.getAllPost = (req, res, next) => {
 }
 
 exports.likePost = (req, res, next ) => {
+  console.log(req.body)
   Post.findOne({ _id: req.params.id})
     .then(post => {
-      if (req.body.like === 1) {
+      if (req.body.like === 1 && post.usersLiked.indexOf(req.body.userId) === -1) {
         post.likes +=1
         post.usersLiked.push(req.body.userId)
-      } else if (req.body.like === 0) {
-          if (post.usersLiked.indexOf(req.body.userId) > -1) {
-            post.usersLiked.splice(post.usersLiked.indexOf(req.body.userId))
-            post.likes -= 1
-          }
-          if (post.usersDisliked.indexOf(req.body.userId) > -1) {
-            post.usersDisliked.splice(post.usersDisliked.indexOf(req.body.userId))
-            post.dislikes -= 1
-          }
+        if (post.usersDisliked.includes(req.body.userId)){
+          post.usersDisliked.splice(post.usersDisliked.indexOf(req.body.userId))
+          post.dislikes -=1
         }
-        else {
+      } else if (req.body.like === -1 && post.usersDisliked.indexOf(req.body.userId) === -1) {
           post.dislikes +=1
           post.usersDisliked.push(req.body.userId)
+          if (post.usersLiked.includes(req.body.userId)){
+            post.usersLiked.splice(post.usersLiked.indexOf(req.body.userId))
+            post.likes -=1
+          }
+        } else if (req.body.like === 1 && post.usersLiked.includes(req.body.userId)) {
+          post.usersLiked.splice(post.usersLiked.indexOf(req.body.userId))
+          post.likes -=1
+        } else if (req.body.like === -1 && post.usersDisliked.includes(req.body.userId)) {
+          post.usersDisliked.splice(post.usersDisliked.indexOf(req.body.userId))
+          post.dislikes -=1
         }
+        console.log(post.usersDisliked)
       post.save()
       res.status(200).json(post)
-      
     })
     .catch(error => res.status(400).json({ error }));
 }

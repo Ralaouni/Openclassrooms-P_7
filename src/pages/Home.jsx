@@ -3,39 +3,39 @@ import { useState } from "react"
 import logo from '../images/icon-left-font.png';
 import '../App.css';
 import AddOneposts from "../components/addOnePost";
-
-
-
-// import { Image } from "react"
+import { useNavigate } from "react-router-dom";
 
 
 
 function Home() {
+  const navigate = useNavigate()
+  if (document.cookie === '') {
+    navigate("/Login")
+  }
   
-  let credentials = localStorage.credentials
 
-  console.log("ass")
 
   const [image, setImage] = useState(null);
   const [post, setPost] = useState("");
   const [message, setMessage] = useState("");
 
+  console.log(image)
+
 
   const formData = new FormData();
   formData.append("post", post);
   formData.append("image", image);
-  formData.append("credentials", credentials)
+  formData.append("cookies", document.cookie)
 
   let postSubmit = async (e) => {
-    e.preventDefault();
     try {
       let res = await fetch("http://localhost:8000/api/post/", {
         method: "POST",
         Accept: "application/json",
         headers:
         { 
-          'authorization':'credentials',
-          'Accept': 'multipart/form-data'
+          'Authorization':`${document.cookie}`,
+          'Accept': 'multipart/form-data',
         },
         body: formData
       });
@@ -58,19 +58,12 @@ function Home() {
       <header className="Home-header">
        <img src={logo} className="Home-logo" alt="logo" />
       </header>
-      <nav className="home-menu">
-        <h1> Menu </h1>
-        <ul>
-          <li>Mes post</li>
-          <li>Personnes connectées</li>
-          <li>Sign out</li>
-        </ul>
-      </nav>
       </div>
-      <div id="post+create">
+      <div id="post_create">
       <div className="create-Post">
+      <h2 className="post-add-title">Ajouter un Post et exprimez-vous</h2>
         <form id="form-post" onSubmit={postSubmit}>
-        <textarea value= {post} onChange={(e) => setPost(e.target.value)} name="post" rows="12" cols="35">Exprimez-vous</textarea>
+        <textarea className="text-addpost" value= {post} onChange={(e) => setPost(e.target.value)} name="post" rows="12" cols="35">Exprimez-vous</textarea>
         <div >
           {image && (
             <div>

@@ -7,6 +7,7 @@ import logo from '../images/icon-left-font.png';
 
 function App() {
 
+  
   const credentials =[]
 
   const navigate = useNavigate()
@@ -19,7 +20,10 @@ function App() {
     try {
       let res = await fetch("http://localhost:8000/api/auth/login", {
         method: "POST",
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
         body: JSON.stringify({
           email: email,
           password: password,
@@ -30,6 +34,11 @@ function App() {
         setEmail("");
         setPassword("");
         setMessage("User logged in successfully");
+        document.cookie=`userId=${resJson.userId}`
+        document.cookie=`token=${resJson.token}`
+        document.cookie=`name=${resJson.name}`
+        document.cookie=`forename=${resJson.forename}`
+        document.cookie=`job=${resJson.job}`
         navigate("/")
         credentials.push(resJson)
         localStorage.setItem("credentials", JSON.stringify(credentials))
@@ -41,6 +50,8 @@ function App() {
     }
     
   };
+
+
   
 
   return (
@@ -48,7 +59,7 @@ function App() {
       <div>
         <img src={logo} className="Login-logo" alt="logo" />
       </div>
-      <form onSubmit={handleSubmit}>
+      <form className="log-form" onSubmit={handleSubmit}>
         <input
           className="log-input"
           type="text"

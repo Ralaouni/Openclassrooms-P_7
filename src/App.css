@@ -1,20 +1,51 @@
 /* Nav */
 .nav {
   text-align: center;
-  background-color: #0095ff;
+  background-color: #4E5166;
+  height: 40px;
+}
+.nav-link{
+  color: white;
+  text-decoration: none;
+  margin-left: 10px;
+}
+.Acceuil{
+  position: absolute;
+  top: 8px;
+  left: 30%;
+}
+.logo-nav {
+  width: 150px;
+  position: absolute;
+  top: -55px;
+  left: 5%;
+}
+.login-signin-nav{
+  position: absolute;
+  right: 10px;
+  top: 8px;
 }
 
 /* Login / Sign in */
 .App {
-  display: flex;
-  justify-content: center;
+  margin: auto;
+  width: 60%;
+  border: solid #a71c00 1px
+  ;
   margin-top: 5rem;
+  flex-direction: row;
 }
 .Login-logo {
-  display: block;
+  display: flex;
   margin-left: auto;
   margin-right: auto;
-  width: 70%;
+  width: 30%;
+}
+.log-form{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
 }
 .log-input {
   display: block;
@@ -95,8 +126,29 @@
 .Home-logo {
   height: 40vmin;
   pointer-events: none;
-  
 }
+#post_create{
+  position: relative;
+  top: 50px;
+}
+.create-Post{
+  width: 80%;
+}
+.post-add-title{
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+
+}
+.text-addpost{
+  display: flex;
+  overflow: auto;
+  height: 100px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 90%;
+}
+
 
 /* Posts */
 #all-post{
@@ -107,17 +159,48 @@ article{
 }
 .all-names{
   font-size: medium;
+  margin-left: 10px;
 }
 .job{
   font-weight: bold;
+  margin-left: 10px;
   font-size: 13px;
 }
+.posts-image{
+  width: 100%;
+}
+.posts-text{
+  padding: 10px;
+  border-top: rgba(0, 0, 0, 0.551) solid 1px;
+}
+
+
 .like-dislike{
   display: flex;
-  background-color: #0064bd;
+  justify-content: flex-end;
+  position: relative;
+  bottom: 15px;
+  margin-right: 15px;
+}
+.span-like-dislike{
+  margin-left: 10px;
+  margin-right: 10px;
 }
 .thumbs {
   width: 25px;
+}
+.like-button, .dislike-button {
+  font-size: 1rem;
+  padding: 5px 10px;
+  color:   #585858;
+}
+.disliked {
+  font-weight: bold;
+  color: #ec1e1e;
+}
+.liked {
+  font-weight: bold;
+  color: #1565c0;
 }
 
 .home-menu {
