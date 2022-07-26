@@ -60,7 +60,13 @@ exports.modifyPost = (req, res, next) => {
         postObject.post = req.body.post
       }
       if (req.file !== undefined) {
+
         postObject.imageUrl = `${req.protocol}://localhost:3000/images/${req.file.filename}`
+        const filename = post.imageUrl.split('/images/')[1];
+        fs.unlink(`../public/images/${filename}`, (err) => {
+          if (err) { console.log(err) }
+          else { console.log("file deleted") }
+        })
       } else if (post.imageUrl !== undefined && req.body.image === 'null') {
         const filename = post.imageUrl.split('/images/')[1];
         fs.unlink(`../public/images/${filename}`, (err) => {

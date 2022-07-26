@@ -136,6 +136,7 @@ function App() {
   const [job, setJob] = useState("");
   const [message, setMessage] = useState("");
 
+
   let handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -168,39 +169,6 @@ function App() {
     }
   };
 
-  // let Loginfunction = async (e) => {
-  //   e.preventDefault();
-  //   try {
-  //     let res = await fetch("http://localhost:8000/api/auth/login", {
-  //       method: "POST",
-  //       headers: { 
-  //         'Accept': 'application/json',
-  //         'Content-Type': 'application/json'
-  //       },
-  //       body: JSON.stringify({
-  //         email: email,
-  //         password: password,
-  //       }), 
-  //     });
-  //     let resJson = await res.json();
-  //     if (res.status === 200) {
-  //       setEmail("");
-  //       setPassword("");
-  //       setMessage("User logged in successfully");
-  //       document.cookie=`userId=${resJson.userId}`
-  //       document.cookie=`token=${resJson.token}`
-  //       document.cookie=`name=${resJson.name}`
-  //       document.cookie=`forename=${resJson.forename}`
-  //       document.cookie=`job=${resJson.job}`
-  //       navigate("/")
-  //     } else {
-  //       setMessage("Some error occured");
-  //     }
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
-
   return (
     <div className="App">
       <div>
@@ -214,6 +182,7 @@ function App() {
           placeholder="Email"
           onChange={(e) => setEmail(e.target.value)}
         />
+        <span id="Email" className="erromsg"></span>
         <input
           className="log-input"
           type="text"
@@ -228,6 +197,7 @@ function App() {
           placeholder="Name"
           onChange={(e) => setName(e.target.value)}
         />
+        <span id="Name" className="erromsg"></span>
         <input
           className="log-input"
           type="text"
@@ -235,6 +205,7 @@ function App() {
           placeholder="Forename"
           onChange={(e) => setForename(e.target.value)}
         />
+        <span id="Forename" className="erromsg"></span>
         <input
           className="log-input"
           type="text"
@@ -242,6 +213,7 @@ function App() {
           placeholder="Job"
           onChange={(e) => setJob(e.target.value)}
         />
+        <span id="job" className="erromsg"></span>
 
         <button className="log-button"  type="submit">Sign Up</button>
 
