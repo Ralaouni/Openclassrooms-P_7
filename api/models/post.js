@@ -5,7 +5,7 @@ const postSchema = mongoose.Schema({
     name: { type: String, required: true },
     forename: { type: String, required: true },
     job: { type: String, required: true },
-    post: { type: String, required: true },
+    post: { type: String, required: false },
     imageUrl: { type: String, required: false },
     likes: { type: Number, required: false },
     dislikes: { type: Number, required: false },

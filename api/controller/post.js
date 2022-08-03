@@ -5,6 +5,8 @@ const jwt = require('jsonwebtoken');
 // const post = require('../models/post');
 
 exports.createPost = (req, res, next) => {
+  console.log(req.body)
+  console.log(req.body.post)
   const userId = req.body.cookies.split('; ')
     .find(row => row.startsWith('userId'))
     .split('=')[1]

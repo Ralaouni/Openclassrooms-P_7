@@ -11,7 +11,9 @@ import { faThumbsUp, faThumbsDown,} from '@fortawesome/free-solid-svg-icons';
 
 const  AddOneposts =  () => {
 
-  let date = Date().slice(0,10)
+  let date = Date().slice(0,15)
+
+  console.log(date)
 
   const [data, setData] = useState ([])
 
@@ -36,10 +38,8 @@ const  AddOneposts =  () => {
 
     {data.length !== 0 && data.map((posts,i) =>  {
 
-      let d = posts.date[0].slice(0,10)
+      let d = posts.date[0].slice(0,15)
       let today = posts.date[0].slice(16,24)
-
-      console.log(date)
       
 
       let PostDelete = () => {

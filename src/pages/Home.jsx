@@ -4,10 +4,14 @@ import logo from '../images/icon-left-font.png';
 import '../App.css';
 import AddOneposts from "../components/addOnePost";
 import { useNavigate } from "react-router-dom";
+import Auth from "../components/Auth/Auth";
 
 
 
 function Home() {
+
+  Auth()
+
   const navigate = useNavigate()
   if (document.cookie === '') {
     navigate("/Login")
@@ -65,7 +69,7 @@ function Home() {
         <div id="post_create">
         <div className="create-Post">
         <h2 className="post-add-title">Ajouter un Post et exprimez-vous</h2>
-          <form id="form-post" onSubmit={postSubmit}>
+          <form id="form-post" placeholder="" onSubmit={postSubmit}>
           <textarea className="text-addpost" value= {post} onChange={(e) => setPost(e.target.value)} name="post" rows="12" cols="35">Exprimez-vous</textarea>
           <div className="img-input" >
             {image && (

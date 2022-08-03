@@ -12,9 +12,9 @@ function Header() {
             <Link className='Acceuil nav-link' to="/">Accueil</Link>
         </div>
                     <div className="login-signin-nav">
-                        <Link className='nav-login nav-link' to="/Login">Login</Link>
+                        <Link className='nav-login nav-link' to="/">Login</Link>
                         <Link className='nav-signin nav-link' to="/Signin" >Signin</Link>
-                        <Link className='nav-signin nav-link' to="/Login"
+                        <Link className='nav-signin nav-link' to="/"
                         onClick={Signout} >Signout</Link>
             </div>
         </nav>
