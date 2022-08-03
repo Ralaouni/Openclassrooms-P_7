@@ -37,7 +37,7 @@ function App() {
         document.cookie=`name=${resJson.name}`
         document.cookie=`forename=${resJson.forename}`
         document.cookie=`job=${resJson.job}`
-        navigate("/")
+        navigate("/Home")
         localStorage.setItem("token", resJson.token)
       } else {
         setMessage("Some error occured");
@@ -66,7 +66,7 @@ function App() {
         />
         <input
           className="log-input"
-          type="text"
+          type="password"
           value={password}
           placeholder="Password"
           onChange={(e) => setPassword(e.target.value)}

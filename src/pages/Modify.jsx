@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from 'axios'
-import { Link } from 'react-router-dom';
+
 
 
 const Modify = () => {
+
+    const navigate = useNavigate()
 
     const [post, setPost] = useState([])
 
@@ -49,6 +51,13 @@ const Modify = () => {
 
         axios.put(`http://localhost:8000/api/post/${post._id}`, formData,{headers:{'Authorization':`${document.cookie}`}});
 
+        setTimeout(() => {
+            navigate("/Home")
+        }, 300);
+
+        
+        
+
     }
 
 
@@ -56,32 +65,35 @@ const Modify = () => {
 
 
     return (
-        <article key={post._id} id={post._id}>
-            <form>
-                <h2 className="all-names">{post.name}&nbsp;{post.forename}</h2>
-                <h2 className="job">{post.job}</h2>
-                <div >
+        <article className="modify-article" key={post._id} id={post._id}>
+            <form className="modify-form">
+                <h2 className="all-names modify-names">{post.name}&nbsp;{post.forename}</h2>
+                <h2 className="job modify-job">{post.job}</h2>
+                <div className="img-input">
                     {(image &&
-                        <div>
+                        <div className="img-create-post" >
                             <img alt="not fount" width={"250px"} src={imgUrl} />
                             <br />
-                            <button onClick={() => setImage(null)}>Remove</button>
+                            <button className="post-button" onClick={() => setImage(null)}>Remove</button>
                         </div>
                     )}
                     <br />
 
                     <br />
-                    <input
-                        type="file"
-                        name="myimage"
-                        onChange={(event) => {
-                            setImage(event.target.files[0]);
-                        }}
-                    />
+                    <div className="input-img">
+                        <input
+                            className="img-button"
+                            type="file"
+                            name="myimage"
+                            onChange={(event) => {
+                                setImage(event.target.files[0]);
+                            }}
+                        />
+                    </div>
                 </div>
                 <textarea className="text-addpost" value={txtafficher} onChange={(e) => setText(e.target.value)} name="text" rows="12" cols="35"></textarea>
 
-                <button type="submit" onClick={PostModify} ><Link to={`/`}>Modifier</Link></button>
+                <button className="post-button modify-button modify-page-button" type="submit" onClick={PostModify} >Modifier</button>
 
             </form>
         </article>

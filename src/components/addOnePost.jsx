@@ -59,82 +59,82 @@ const  AddOneposts =  () => {
 
 
       return (
-                <article key={posts._id} id={posts._id}>
-                <form>
+                <article key={posts._id} id={posts._id} className="posts-article">
+                <form >
                      <h2 className="all-names">{posts.name}&nbsp;{posts.forename}</h2>
                      <h2 className="job">{posts.job}</h2>
                      {(() => {
                       if(date===d){
                         return (
-                          <p className="post-date">{today}</p>
+                          <p className="posts-date">{today}</p>
                         )
                       } else {
                         return (
-                          <p className="post-date">{d}</p>
+                          <p className="posts-date">{d}</p>
                         )
                       }
                      })()}
                      <div>
-                     <img className="posts-image" src={posts.imageUrl} alt=""/>
-                     <p className="posts-text">{posts.post}</p>
-                     {(() => {
-                          if ( posts.usersLiked.includes(userId) ) {
-                            return (
-                              <div className="like-dislike">
-                                  <span className="span-like span-like-dislike">
-                                  {posts.likes}
-                                  </span>
-                                  <button className = 'liked like-button' onClick = {PostLike}>
-                                  <FontAwesomeIcon icon={faThumbsUp} /> </button> 
-                                  <button className = 'dislike-button'  onClick = {PostDislike}>
-                                  <FontAwesomeIcon icon={faThumbsDown} /> </button>
-                                  <span className="span-dislike span-like-dislike">
-                                  {posts.dislikes}
-                                  </span>
-                              </div>                
-                            )
-                          }
-                          else if (posts.usersDisliked.includes(userId)){
-                            return (
-                              <div className="like-dislike">
-                                  <span className="span-like span-like-dislike">
-                                  {posts.likes}
-                                  </span>
-                                  <button className = 'like-button' onClick = {PostLike}>
-                                  <FontAwesomeIcon icon={faThumbsUp} /> </button> 
-                                  <button className = 'disliked dislike-button'  onClick = {PostDislike}>
-                                  <FontAwesomeIcon icon={faThumbsDown} /> </button>
-                                  <span className="span-dislike span-like-dislike">
-                                  {posts.dislikes}
-                                  </span>
-                              </div>                
-                            )
-                            }
-                            else {
+                      <img className="posts-image" src={posts.imageUrl} alt=""/>
+                      <p className="posts-text">{posts.post}</p>
+                      {(() => {
+                            if ( posts.usersLiked.includes(userId) ) {
                               return (
-                              <div className="like-dislike">
-                                  <span className="span-like span-like-dislike">
-                                  {posts.likes}
-                                  </span>
-                                  <button className = 'like-button' onClick = {PostLike}>
-                                  <FontAwesomeIcon icon={faThumbsUp} /> </button> 
-                                  <button className = 'like-button dislike-button'  onClick = {PostDislike}>
-                                  <FontAwesomeIcon icon={faThumbsDown} /> </button>
-                                  <span className="span-dislike span-like-dislike">
-                                  {posts.dislikes}
-                                  </span>
-                              </div>                
-                            )
+                                <div className="like-dislike">
+                                    <span className="span-like span-like-dislike">
+                                    {posts.likes}
+                                    </span>
+                                    <button className = 'liked like-button' onClick = {PostLike}>
+                                    <FontAwesomeIcon icon={faThumbsUp} /> </button> 
+                                    <button className = 'dislike-button'  onClick = {PostDislike}>
+                                    <FontAwesomeIcon icon={faThumbsDown} /> </button>
+                                    <span className="span-dislike span-like-dislike">
+                                    {posts.dislikes}
+                                    </span>
+                                </div>                
+                              )
                             }
-                      })()}
+                            else if (posts.usersDisliked.includes(userId)){
+                              return (
+                                <div className="like-dislike">
+                                    <span className="span-like span-like-dislike">
+                                    {posts.likes}
+                                    </span>
+                                    <button className = 'like-button' onClick = {PostLike}>
+                                    <FontAwesomeIcon icon={faThumbsUp} /> </button> 
+                                    <button className = 'disliked dislike-button'  onClick = {PostDislike}>
+                                    <FontAwesomeIcon icon={faThumbsDown} /> </button>
+                                    <span className="span-dislike span-like-dislike">
+                                    {posts.dislikes}
+                                    </span>
+                                </div>                
+                              )
+                              }
+                              else {
+                                return (
+                                <div className="like-dislike">
+                                    <span className="span-like span-like-dislike">
+                                    {posts.likes}
+                                    </span>
+                                    <button className = 'like-button' onClick = {PostLike}>
+                                    <FontAwesomeIcon icon={faThumbsUp} /> </button> 
+                                    <button className = 'like-button dislike-button'  onClick = {PostDislike}>
+                                    <FontAwesomeIcon icon={faThumbsDown} /> </button>
+                                    <span className="span-dislike span-like-dislike">
+                                    {posts.dislikes}
+                                    </span>
+                                </div>                
+                              )
+                              }
+                        })()}
                 
                      </div>
                      {(() => {
                           if ( posts.userId === userId || userId === "62ded2ffb75bb970f2a22a66" ) {
                             return (
-                              <div>
-                              <button type="submit" onClick={PostDelete}>Supprimer</button>
-                              <button type="submit"><Link to={`/Modify/${posts._id}`}>Modifier</Link></button>
+                              <div className="modify-delete">
+                                <button type="submit" className="post-button delete-button" onClick={PostDelete}>Supprimer</button>
+                                <button className="post-button modify-button" type="submit"><Link className="link-modify" to={`/Modify/${posts._id}`}>Modifier</Link></button>
                               </div>
                               
                             )

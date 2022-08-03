@@ -16,10 +16,10 @@ return (
     <Router>
         <Header />
           <Routes>
-              <Route exact path='/' element={<Home />} />
-              <Route exact path='/Modify/:id' element={<Modify />} />
-              <Route path='/Login' element={<Login/>} />
-              <Route path='/Signin' element={<Signin/>} />
+                <Route path='/' element={<Login/>} />
+                <Route exact path='/Home' element={<Home />} />
+                <Route exact path='/Modify/:id' element={<Modify />} />
+                <Route path='/Signin' element={<Signin/>} />
           </Routes>
     </Router>
 );

@@ -160,7 +160,7 @@ function App() {
         setForename("");
         setJob("");
         setMessage("User created successfully");
-        navigate("/Login")
+        navigate("/")
       } else {
         setMessage("Some error occured");
       }
@@ -185,7 +185,7 @@ function App() {
         <span id="Email" className="erromsg"></span>
         <input
           className="log-input"
-          type="text"
+          type="password"
           value={password}
           placeholder="Password"
           onChange={(e) => setPassword(e.target.value)}
