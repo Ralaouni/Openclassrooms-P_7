@@ -27,16 +27,19 @@ const  AddOneposts =  () => {
     .then(res => {
       (res.json().then(response => setData(response.reverse()) ))
     })
+    
   },[])
 
 
-  
+
   return (
     <div>
 
-    {/* data.map = (comme boucle for mais pour tout ce qui se trouve) */}
+    {/* data.map = (comme boucle for mais pour tout ce qui se trouve dans l'array) */}
 
     {data.length !== 0 && data.map((posts,i) =>  {
+
+      console.log((posts.date[0]))
 
       let d = posts.date[0].slice(0,15)
       let today = posts.date[0].slice(16,24)

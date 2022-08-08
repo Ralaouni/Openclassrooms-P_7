@@ -1,8 +1,13 @@
 
+
 let PostDislike = (e) => {
+
   
     let button = e.currentTarget
-    let article=button.closest("article")
+    let article = button.closest("article")
+
+    
+
 
     let likesend = {
         userId : document.cookie.split('; ')

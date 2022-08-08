@@ -12,6 +12,7 @@ function Home() {
 
   Auth()
 
+
   const navigate = useNavigate()
   if (document.cookie === '') {
     navigate("/Login")
@@ -101,7 +102,7 @@ function Home() {
           </form>
         </div>
         <div id="all-post">
-        <AddOneposts/>
+          <AddOneposts/>
         </div>
         </div>
       </div>
