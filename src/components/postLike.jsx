@@ -2,6 +2,8 @@
 
 let PostLike = (e) => {
 
+  e.preventDefault()
+
     let button = e.currentTarget
     let article=button.closest("article")
 

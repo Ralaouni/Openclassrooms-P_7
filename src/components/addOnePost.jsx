@@ -13,7 +13,7 @@ const  AddOneposts =  () => {
 
   let date = Date().slice(0,15)
 
-  console.log(date)
+  console.log(Date())
 
   const [data, setData] = useState ([])
 
@@ -27,7 +27,6 @@ const  AddOneposts =  () => {
     .then(res => {
       (res.json().then(response => setData(response.reverse()) ))
     })
-    
   },[])
 
 
@@ -80,14 +79,14 @@ const  AddOneposts =  () => {
                      <div>
                       <img className="posts-image" src={posts.imageUrl} alt=""/>
                       <p className="posts-text">{posts.post}</p>
-                      {(() => {
+                      {(function like () {
                             if ( posts.usersLiked.includes(userId) ) {
                               return (
                                 <div className="like-dislike">
                                     <span className="span-like span-like-dislike">
                                     {posts.likes}
                                     </span>
-                                    <button className = 'liked like-button' onClick = {PostLike}>
+                                    <button className = 'liked like-button' onClick = {PostLike} >
                                     <FontAwesomeIcon icon={faThumbsUp} /> </button> 
                                     <button className = 'dislike-button'  onClick = {PostDislike}>
                                     <FontAwesomeIcon icon={faThumbsDown} /> </button>
