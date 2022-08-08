@@ -8,6 +8,7 @@
   color: white;
   text-decoration: none;
   margin-left: 10px;
+  font-size: 18px;
 }
 .Acceuil{
   position: absolute;
@@ -38,6 +39,9 @@
   margin-left: auto;
   margin-right: auto;
   width: 30%;
+  max-width: 350px;
+  min-width: 200px;
+  margin-top: 0px;
 }
 .log-form{
   display: flex;
@@ -47,7 +51,8 @@
 }
 .log-input {
   display: block;
-  width: 20rem;
+  width: 40%;
+  max-width: 20rem;
   height: 2rem;
   padding: 0.5rem;
   font-size: 1.1em;
@@ -57,7 +62,8 @@
 .log-button {
   border: none;
   padding: 1rem;
-  width: 21.2rem;
+  width: 44%;
+  max-width: 21.2rem;
   font-size: 1.2em;
   border-radius: 0.2rem;
   cursor: pointer;
@@ -116,15 +122,17 @@
 /* React */
 
 .Home {
-  display: flex;
+  display: block;
 }
 .home-header {
   display: flex;
 }
 .Home-logo {
-  height: 40vmin;
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+  height: 150px;
   pointer-events: none;
-  position: relative;
 }
 #post_create{
   position: relative;
@@ -135,6 +143,8 @@
 }
 #all-middle-div{
   width: 50%;
+  margin-left: auto;
+  margin-right: auto;
 }
 .post-add-title{
   font-size: 20px;
@@ -161,6 +171,7 @@
   background-color: rgba(51, 51, 51, 0.05);
   border-radius: 8px;
   border-width: 0;
+  width: 80%;
   color: #333333;
   font-size: 14px;
   font-weight: 500;
@@ -170,6 +181,10 @@
   padding: 10px 12px;
   text-align: center;
 }
+.post-button:hover{
+  cursor: pointer;
+  border: rgba(0, 0, 0, 0.311) solid 1px;
+}
 .img-button{
   background-color: #fff;
   color: #000;
@@ -177,6 +192,8 @@
   border-radius: 10px;
   font-size: 14px;
   font-weight: bold;
+  margin-right: auto;
+  margin-left: auto;
 }
 .post{
   display: flex;
@@ -276,12 +293,33 @@ article{
     display: block;
   }
   .Home-logo{
+    height: 100px;
     display: flex;
     margin-left: auto;
     margin-right: auto;
   }
   #all-middle-div{
     width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@media (max-width:  600px) {
+  .nav{
+    height: 90px;
+    display: flex;
+  }
+  .Acceuil{
+    top: 58px;
+    left: 10px;
+  }
+  .login-signin-nav{
+    top: 58px;
+  }
+  .logo-nav{
+    position: relative;
+    display: flex;
     margin-left: auto;
     margin-right: auto;
   }

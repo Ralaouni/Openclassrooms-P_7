@@ -5,8 +5,6 @@ const jwt = require('jsonwebtoken');
 // const post = require('../models/post');
 
 exports.createPost = (req, res, next) => {
-  console.log(req.body)
-  console.log(req.body.post)
   const userId = req.body.cookies.split('; ')
     .find(row => row.startsWith('userId'))
     .split('=')[1]
@@ -31,13 +29,18 @@ exports.createPost = (req, res, next) => {
     usersLiked: [],
     usersDisliked: [],
   });
+
   if (req.file !== undefined) {
     post.imageUrl = (`${req.protocol}://localhost:3000/images/${req.file.filename}`)
-  }
+  };
 
-  post.save()
+  if (req.file === undefined && req.body.post === '') {
+    res.status(400).json("Error, post is empty")
+  } else {
+    post.save()
     .then(() => res.status(201).json({ message: 'Objet enregistré !' }))
     .catch(error => res.status(400).json({ error }));
+  }
 }
 
 exports.modifyPost = (req, res, next) => {
@@ -48,11 +51,13 @@ exports.modifyPost = (req, res, next) => {
     const Id = req.body.cookies.split('; ')
     .find(row => row.startsWith('userId'))
     .split('=')[1];
+
     if (Id !== decodedToken.userId || Id !== "62ded2ffb75bb970f2a22a66") {
       res.status(400).json({
         error: new Error('Unauthorized request!')
       })
-    }
+    };
+
   Post.findOne({ _id: req.params.id })
     .then(post => {
       const postObject = {}
@@ -60,7 +65,8 @@ exports.modifyPost = (req, res, next) => {
         postObject.post = post.post
       } else {
         postObject.post = req.body.post
-      }
+      };
+
       if (req.file !== undefined) {
 
         postObject.imageUrl = `${req.protocol}://localhost:3000/images/${req.file.filename}`
@@ -76,7 +82,8 @@ exports.modifyPost = (req, res, next) => {
           else { console.log("file deleted") }
         })
         postObject.imageUrl = ''
-      }
+      };
+
       Post.updateOne({ _id: req.params.id }, { ...postObject, _id: req.params.id })
         .then(() => res.status(200).json({ message: 'Objet modifié !' }))
     })
@@ -93,16 +100,19 @@ exports.deletePost = (req, res, next) => {
       const Id = req.headers.authorization.split('; ')
       .find(row => row.startsWith('userId'))
       .split('=')[1];
+
       if (!post) {
         res.status(404).json({
           error: new Error('No such post!')
         });
       }
+
       if (post.userId !== decodedToken.userId || Id !== "62ded2ffb75bb970f2a22a66") {
         res.status(400).json({
           error: new Error('Unauthorized request!')
         });
       }
+
       if (post.imageUrl !== undefined) {
         const filename = post.imageUrl.split('/images/')[1];
         fs.unlink(`../public/images/${filename}`, () => {
@@ -116,6 +126,7 @@ exports.deletePost = (req, res, next) => {
           .catch(error => res.status(400).json({ error }));
       }
     })
+
     .catch(error => res.status(500).json({ error }));
 };
 
@@ -134,6 +145,7 @@ exports.getAllPost = (req, res, next) => {
 exports.likePost = (req, res, next) => {
   Post.findOne({ _id: req.params.id })
     .then(post => {
+
       if (req.body.like === 1 && post.usersLiked.indexOf(req.body.userId) === -1) {
         post.likes += 1
         post.usersLiked.push(req.body.userId)
