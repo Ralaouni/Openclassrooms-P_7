@@ -115,7 +115,7 @@ const  AddOneposts =  () => {
                 'Authorization':`${document.cookie}`,
                 'Content-Type': 'application/json' 
               }
-            });
+            })
         }
         deletePost();
       }

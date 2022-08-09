@@ -13,15 +13,12 @@ function Home() {
   const [post, setPost] = useState("");
   const [message, setMessage] = useState("");
 
-
-
-
   const formData = new FormData();
   formData.append("post", post);
   formData.append("image", image);
   formData.append("cookies", document.cookie)
 
-  let postSubmit = async (e) => {
+  async function postSubmit () {
     let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' }
     let date = new Date()
     formData.append("date", date.toLocaleDateString("fr-FR", options))
