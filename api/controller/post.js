@@ -44,19 +44,9 @@ exports.createPost = (req, res, next) => {
 }
 
 exports.modifyPost = (req, res, next) => {
-  const token = req.headers.authorization.split('; ')
-    .find(row => row.startsWith('token'))
-    .split('=')[1];
-    const decodedToken = jwt.verify(token, 'RANDOM_TOKEN_SECRET');
-    const Id = req.body.cookies.split('; ')
-    .find(row => row.startsWith('userId'))
-    .split('=')[1];
 
-    if (Id !== decodedToken.userId || Id !== "62ded2ffb75bb970f2a22a66") {
-      res.status(400).json({
-        error: new Error('Unauthorized request!')
-      })
-    };
+  console.log(req.file)
+  console.log(req.body.image)
 
   Post.findOne({ _id: req.params.id })
     .then(post => {
@@ -67,14 +57,15 @@ exports.modifyPost = (req, res, next) => {
         postObject.post = req.body.post
       };
 
-      if (req.file !== undefined) {
-
-        postObject.imageUrl = `${req.protocol}://localhost:3000/images/${req.file.filename}`
-        const filename = post.imageUrl.split('/images/')[1];
+      if (req.file !== undefined ) {
+        postObject.imageUrl = `http://localhost:3000/images/${req.file.filename}`
+        if (post.imageUrl !== undefined) {
+          const filename = post.imageUrl.split('/images/')[1];
         fs.unlink(`../public/images/${filename}`, (err) => {
           if (err) { console.log(err) }
           else { console.log("file deleted") }
         })
+        }
       } else if (post.imageUrl !== undefined && req.body.image === 'null') {
         const filename = post.imageUrl.split('/images/')[1];
         fs.unlink(`../public/images/${filename}`, (err) => {
@@ -83,6 +74,8 @@ exports.modifyPost = (req, res, next) => {
         })
         postObject.imageUrl = ''
       };
+
+      console.log(postObject)
 
       Post.updateOne({ _id: req.params.id }, { ...postObject, _id: req.params.id })
         .then(() => res.status(200).json({ message: 'Objet modifié !' }))

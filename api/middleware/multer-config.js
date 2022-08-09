@@ -10,11 +10,3 @@ const storage = multer.diskStorage({
 });
 
 module.exports = multer({storage: storage}).single('image');
-
-// const MIME_TYPES = {
-//   'image/jpg': 'jpg',
-//   'image/jpeg': 'jpg',
-//   'image/png': 'png'
-// };
-
-// callback(null, name + Date.now() + '.' + extension);

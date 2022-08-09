@@ -199,7 +199,8 @@ const  AddOneposts =  () => {
                             return (
                               <div className="modify-delete">
                                 <button type="submit" className="post-button delete-button" onClick={PostDelete}>Supprimer</button>
-                                <button className="post-button modify-button" type="submit"><Link className="link-modify" to={`/Modify/${posts._id}`}>Modifier</Link></button>
+                                <Link className="link-modify" to={`/Modify/${posts._id}`}><button className="post-button modify-button" type="submit">Modifier</button>
+                                </Link>
                               </div>
                               
                             )

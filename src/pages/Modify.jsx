@@ -19,7 +19,7 @@ const Modify = () => {
                 (res.json()
                     .then(response => setPost(response)))
             })
-    }, [])
+    }, )
 
     const [image, setImage] = useState("baseImage");
     const [text, setText] = useState(null);
@@ -53,11 +53,7 @@ const Modify = () => {
 
         setTimeout(() => {
             navigate("/Home")
-        }, 300);
-
-        
-        
-
+        }, 2000);
     }
 
 

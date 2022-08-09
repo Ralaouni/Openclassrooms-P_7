@@ -18,8 +18,10 @@ let Auth = async() => {
         },
       });
       let resJson = await res.json()
+      console.log(resJson)
       if (resJson !== true) {
         navigate('/')
+        return;
       }
 
     } catch (error) {

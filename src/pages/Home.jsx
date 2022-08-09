@@ -3,25 +3,12 @@ import { useState } from "react"
 import logo from '../images/icon-left-font.png';
 import '../App.css';
 import AddOneposts from "../components/addOnePost";
-import { useNavigate } from "react-router-dom";
 import Auth from "../components/Auth/Auth";
-
-
 
 function Home() {
 
   Auth()
-  let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' }
-  let ladate = new Date()
-  console.log(ladate.toLocaleDateString("fr-FR", options))
-
-  const navigate = useNavigate()
-  if (document.cookie === '') {
-    navigate("/Login")
-  }
   
-
-
   const [image, setImage] = useState(null);
   const [post, setPost] = useState("");
   const [message, setMessage] = useState("");
