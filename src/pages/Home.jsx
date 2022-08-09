@@ -11,7 +11,9 @@ import Auth from "../components/Auth/Auth";
 function Home() {
 
   Auth()
-
+  let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' }
+  let ladate = new Date()
+  console.log(ladate.toLocaleDateString("fr-FR", options))
 
   const navigate = useNavigate()
   if (document.cookie === '') {
@@ -33,8 +35,9 @@ function Home() {
   formData.append("cookies", document.cookie)
 
   let postSubmit = async (e) => {
+    let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' }
     let date = new Date()
-    formData.append("date", date)
+    formData.append("date", date.toLocaleDateString("fr-FR", options))
     try {
       let res = await fetch("http://localhost:8000/api/post/", {
         method: "POST",

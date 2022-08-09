@@ -9,10 +9,9 @@ import { faThumbsUp, faThumbsDown,} from '@fortawesome/free-solid-svg-icons';
 
 const  AddOneposts =  () => {
 
-
-  let date = Date().slice(0,15)
-
-  console.log(Date())
+  let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'}
+  let newdate = new Date()
+  let date = newdate.toLocaleDateString("fr-FR", options)
 
   const [data, setData] = useState ([])
   const [alreadyliked, setAlreadyliked] = useState (false)
@@ -52,11 +51,13 @@ const  AddOneposts =  () => {
             }
           })
           .then((res) => {
+            setTimeout(() => {
               if (alreadyliked === false) {
                 setAlreadyliked(true)
               } else {
                 setAlreadyliked(false)
               }
+            }, 400);
           })
   }
 
@@ -81,11 +82,14 @@ const  AddOneposts =  () => {
             }
           })
           .then((res) => {
-            if (alreadyliked === false) {
-              setAlreadyliked(true)
-            } else {
-              setAlreadyliked(false)
-            }
+            setTimeout(() => {
+              if (alreadyliked === false) {
+                setAlreadyliked(true)
+              } else {
+                setAlreadyliked(false)
+              }
+            }, 400);
+            
           })
   }
 
@@ -98,10 +102,9 @@ const  AddOneposts =  () => {
 
     {data.length !== 0 && data.map((posts,i) =>  {
 
-      console.log((posts.date[0]))
-
-      let d = posts.date[0].slice(0,15)
-      let today = posts.date[0].slice(16,24)
+      let datearray = posts.date[0].split(" ")
+      let d = datearray.slice(0,4).join(" ")
+      let today = datearray.slice(4,6).join(" ")
       
 
       let PostDelete = () => {
@@ -128,7 +131,7 @@ const  AddOneposts =  () => {
                      {(() => {
                       if(date===d){
                         return (
-                          <p className="posts-date">{today}</p>
+                          <p className="posts-date"> Aujourd'hui {today}</p>
                         )
                       } else {
                         return (
