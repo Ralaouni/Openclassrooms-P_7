@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
-import PostLike from "./postLike";
-import PostDislike from "./postDislike";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faThumbsUp, faThumbsDown,} from '@fortawesome/free-solid-svg-icons';
@@ -11,11 +9,14 @@ import { faThumbsUp, faThumbsDown,} from '@fortawesome/free-solid-svg-icons';
 
 const  AddOneposts =  () => {
 
+
   let date = Date().slice(0,15)
 
   console.log(Date())
 
   const [data, setData] = useState ([])
+  const [alreadyliked, setAlreadyliked] = useState (false)
+  
 
   const userId = document.cookie.split('; ')
   .find(row => row.startsWith('userId'))
@@ -27,7 +28,66 @@ const  AddOneposts =  () => {
     .then(res => {
       (res.json().then(response => setData(response.reverse()) ))
     })
-  },[])
+  },[alreadyliked])
+
+  let PostLike = (e) => {
+
+    e.preventDefault()
+  
+      let button = e.currentTarget
+      let article = button.closest("article")
+      let likesend = {
+          userId : document.cookie.split('; ')
+          .find(row => row.startsWith('userId'))
+          .split('=')[1],
+          like : 1
+      }
+      
+          fetch(`http://localhost:8000/api/post/${article.id}/like`, {
+            method: "POST",
+            body: JSON.stringify(likesend),
+            headers: { 
+              'Authorization':`${document.cookie}`,
+              'Content-Type': 'application/json' 
+            }
+          })
+          .then((res) => {
+              if (alreadyliked === false) {
+                setAlreadyliked(true)
+              } else {
+                setAlreadyliked(false)
+              }
+          })
+  }
+
+  let PostDislike = (e) => {
+
+    e.preventDefault()
+    
+      let button = e.currentTarget
+      let article = button.closest("article")
+      let likesend = {
+          userId : document.cookie.split('; ')
+          .find(row => row.startsWith('userId'))
+          .split('=')[1],
+          like : -1
+      }
+          fetch(`http://localhost:8000/api/post/${article.id}/like`, {
+            method: "POST",
+            body: JSON.stringify(likesend),
+            headers: { 
+              'Authorization':`${document.cookie}`,
+              'Content-Type': 'application/json' 
+            }
+          })
+          .then((res) => {
+            if (alreadyliked === false) {
+              setAlreadyliked(true)
+            } else {
+              setAlreadyliked(false)
+            }
+          })
+  }
 
 
 
@@ -79,7 +139,7 @@ const  AddOneposts =  () => {
                      <div>
                       <img className="posts-image" src={posts.imageUrl} alt=""/>
                       <p className="posts-text">{posts.post}</p>
-                      {(function like () {
+                      {(() => {
                             if ( posts.usersLiked.includes(userId) ) {
                               return (
                                 <div className="like-dislike">
