@@ -57,7 +57,7 @@ const  AddOneposts =  () => {
               } else {
                 setAlreadyliked(false)
               }
-            }, 400);
+            }, 500);
           })
   }
 
@@ -88,7 +88,7 @@ const  AddOneposts =  () => {
               } else {
                 setAlreadyliked(false)
               }
-            }, 400);
+            }, 500);
             
           })
   }
