@@ -12,38 +12,62 @@ function App() {
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
 
+  let regExpEmail =  /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/
+
+  function controlemail(){
+    if (regExpEmail.test(email)) {
+        return true
+    } else {
+        return false
+    }
+  }
+  function controlpassword(){
+    if (password.length >= 4 && password.includes(" ") === false) {
+      return true
+    } else {
+      return false
+    }
+  }
+
   let handleSubmit = async (e) => {
 
     e.preventDefault();
-    try {
-      let res = await fetch("http://localhost:8000/api/auth/login", {
-        method: "POST",
-        headers: { 
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          email: email,
-          password: password,
-        }), 
-      });
-      let resJson = await res.json();
-      if (res.status === 200) {
-        setEmail("");
-        setPassword("");
-        setMessage("User logged in successfully");
-        document.cookie=`userId=${resJson.userId}`
-        document.cookie=`token=${resJson.token}`
-        document.cookie=`name=${resJson.name}`
-        document.cookie=`forename=${resJson.forename}`
-        document.cookie=`job=${resJson.job}`
-        navigate("/Home")
-      } else {
-        setMessage("Some error occured");
+
+    if (controlemail() && controlpassword()) {
+      try {
+        let res = await fetch("http://localhost:8000/api/auth/login", {
+          method: "POST",
+          headers: { 
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            email: email,
+            password: password,
+          }), 
+        });
+        let resJson = await res.json();
+        if (res.status === 200) {
+          setEmail("");
+          setPassword("");
+          setMessage("User logged in successfully");
+          document.cookie=`userId=${resJson.userId}`
+          document.cookie=`token=${resJson.token}`
+          document.cookie=`name=${resJson.name}`
+          document.cookie=`forename=${resJson.forename}`
+          document.cookie=`job=${resJson.job}`
+          navigate("/Home")
+        } else {
+          setMessage("Some error occured");
+        }
+      } catch (err) {
+        console.log(err);
       }
-    } catch (err) {
-      console.log(err);
+      
+    } else {
+      setMessage("Veuillez bien renseigner le champs ci-dessus")
     }
+    
     
   };
 
