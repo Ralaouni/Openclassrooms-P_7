@@ -107,8 +107,7 @@ const  AddOneposts =  () => {
       let today = datearray.slice(4,6).join(" ")
       
 
-      let PostDelete = () => {
-        async function deletePost() {
+      let PostDelete = async () => {
             await fetch(`http://localhost:8000/api/post/${posts._id}`, { 
               method: 'delete',
               headers:{ 
@@ -116,8 +115,6 @@ const  AddOneposts =  () => {
                 'Content-Type': 'application/json' 
               }
             })
-        }
-        deletePost();
       }
 
 

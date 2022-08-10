@@ -12,7 +12,6 @@ const Modify = () => {
 
     const { id } = useParams();
 
-
     useEffect(() => {
         fetch(`http://localhost:8000/api/post/${id}`)
             .then(res => {
@@ -37,12 +36,10 @@ const Modify = () => {
         txtafficher = text
     }
 
-
     const formData = new FormData();
     formData.append("image", image);
     formData.append("post", text);
     formData.append("cookies", document.cookie)
-
 
     let PostModify = (e) => {
         e.preventDefault()
@@ -54,10 +51,6 @@ const Modify = () => {
         }, 2000);
     }
 
-
-
-
-
     return (
         <article className="modify-article" key={post._id} id={post._id}>
             <form className="modify-form">
@@ -68,7 +61,7 @@ const Modify = () => {
                         <div className="img-create-post" >
                             <img alt="not fount" width={"250px"} src={imgUrl} />
                             <br />
-                            <button className="post-button" onClick={() => setImage(null)}>Remove</button>
+                            
                         </div>
                     )}
                     <br />

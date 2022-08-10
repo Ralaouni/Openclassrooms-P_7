@@ -13,6 +13,7 @@ function App() {
   const [message, setMessage] = useState("");
 
   let handleSubmit = async (e) => {
+
     e.preventDefault();
     try {
       let res = await fetch("http://localhost:8000/api/auth/login", {
@@ -57,7 +58,7 @@ function App() {
       <form className="log-form" onSubmit={handleSubmit}>
         <input
           className="log-input"
-          type="text"
+          type="email"
           value={email}
           placeholder="Email"
           onChange={(e) => setEmail(e.target.value)}

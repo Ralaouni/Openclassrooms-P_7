@@ -7,6 +7,8 @@ const mongoose = require('mongoose');
 const postRoutes = require ('./routes/post.js')
 const userRoutes = require ('./routes/user')
 
+// 'mongodb+srv://P_7:sRPNiKBZzSVYpJVm@cluster0.e4tgk.mongodb.net/?retryWrites=true&w=majority'
+
 mongoose.connect('mongodb+srv://P_7:sRPNiKBZzSVYpJVm@cluster0.e4tgk.mongodb.net/?retryWrites=true&w=majority',
   { useNewUrlParser: true,
     useUnifiedTopology: true })

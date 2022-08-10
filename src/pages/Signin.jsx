@@ -15,34 +15,81 @@ function App() {
   const [job, setJob] = useState("");
   const [message, setMessage] = useState("");
 
+  let regExpEmail =  /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/
+  let regExpName = /^[A-Z]+([ A-Za-z]+)*/;
+  let regExpNoNumber = /^[^0-9()]+$/
+
+  function controlemail(){
+    if (regExpEmail.test(email)) {
+        return true
+    } else {
+        return false
+    }
+  }
+  function controlpassword(){
+    if (password.length >= 4 && password.includes(" ") === false) {
+      return true
+    } else {
+      return false
+    }
+  }
+  function controlname(){
+    if (regExpName.test(name) && regExpNoNumber.test(name) && name.length >= 2) {
+        return true
+    } else {
+        return false
+    }
+  }
+  function controlforename(){
+    if (regExpName.test(forename) && regExpNoNumber.test(forename) && forename.length >= 2) {
+        return true
+    } else {
+        return false
+    }
+  }
+  function controljob(){
+    if (regExpName.test(job) && regExpNoNumber.test(job) && job.length >= 2) {
+        return true
+    } else {
+        return false
+    }
+  }
+
+
 
   let handleSubmit = async (e) => {
+
     e.preventDefault();
-    try {
-      let res = await fetch("http://localhost:8000/api/auth/signup", {
-        method: "POST",
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          email: email,
-          password: password,
-          name: name,
-          forename: forename,
-          job: job,
-        }), 
-      });
-      if (res.status === 201) {
-        setEmail("");
-        setPassword("");
-        setName("");
-        setForename("");
-        setJob("");
-        setMessage("User created successfully");
-        navigate("/")
-      } else {
-        setMessage("Some error occured");
+
+    if (controlemail() && controlpassword() && controlname() && controljob() && controlforename() ) {
+      try {
+        let res = await fetch("http://localhost:8000/api/auth/signup", {
+          method: "POST",
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            email: email,
+            password: password,
+            name: name,
+            forename: forename,
+            job: job,
+          }), 
+        });
+        if (res.status === 201) {
+          setEmail("");
+          setPassword("");
+          setName("");
+          setForename("");
+          setJob("");
+          setMessage("User created successfully");
+          navigate("/")
+        } else {
+          setMessage("Some error occured");
+        }
+      } catch (err) {
+        console.log(err);
       }
-    } catch (err) {
-      console.log(err);
+    } else {
+      setMessage ("Verifier que les informations soient correctes, le mot de passe ne peut pas contenir d'espace et doit faire 4 caractère minimum")
     }
   };
 
@@ -54,7 +101,7 @@ function App() {
       <form className="log-form"  onSubmit={handleSubmit}>
         <input 
           className="log-input"
-          type="text"
+          type="email"
           value={email}
           placeholder="Email"
           onChange={(e) => setEmail(e.target.value)}
