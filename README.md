@@ -3,7 +3,7 @@ Installation: npm install
 
 Pour lancer le frontend:
 
-    Sur le dossier Groupomania: npm start 
+    Sur le dossier racine: npm start 
 
 Pour lancer le backend:
 
