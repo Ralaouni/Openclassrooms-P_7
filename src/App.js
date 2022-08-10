@@ -8,7 +8,6 @@ import Modify from './pages/Modify';
 import Login from './pages/Login';
 import Signin from './pages/Signin';
 import Header from './components/Header/Header'
-// import Error from './components/Error/Error'
 
   
 function App() {

@@ -45,9 +45,6 @@ exports.createPost = (req, res, next) => {
 
 exports.modifyPost = (req, res, next) => {
 
-  console.log(req.file)
-  console.log(req.body.image)
-
   Post.findOne({ _id: req.params.id })
     .then(post => {
       const postObject = {}
@@ -74,8 +71,6 @@ exports.modifyPost = (req, res, next) => {
         })
         postObject.imageUrl = ''
       };
-
-      console.log(postObject)
 
       Post.updateOne({ _id: req.params.id }, { ...postObject, _id: req.params.id })
         .then(() => res.status(200).json({ message: 'Objet modifié !' }))

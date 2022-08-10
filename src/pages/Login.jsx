@@ -2,7 +2,6 @@ import "../App.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import logo from '../images/icon-left-font.png';
-// import { set } from "mongoose";
 
 
 function App() {
@@ -38,7 +37,6 @@ function App() {
         document.cookie=`forename=${resJson.forename}`
         document.cookie=`job=${resJson.job}`
         navigate("/Home")
-        localStorage.setItem("token", resJson.token)
       } else {
         setMessage("Some error occured");
       }

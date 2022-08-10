@@ -37,8 +37,6 @@ const Modify = () => {
         txtafficher = text
     }
 
-    console.log(post.post)
-
 
     const formData = new FormData();
     formData.append("image", image);
