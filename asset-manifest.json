@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/OC_P_7/static/css/main.ca40e18d.css",
+    "main.js": "/OC_P_7/static/js/main.cfe6519c.js",
+    "static/media/icon-left-font.png": "/OC_P_7/static/media/icon-left-font.e8d7db85ad09d41657b2.png",
+    "static/media/icon-left-font-monochrome-white.png": "/OC_P_7/static/media/icon-left-font-monochrome-white.5e5204e38ca40e4aaf8b.png",
+    "index.html": "/OC_P_7/index.html",
+    "main.ca40e18d.css.map": "/OC_P_7/static/css/main.ca40e18d.css.map",
+    "main.cfe6519c.js.map": "/OC_P_7/static/js/main.cfe6519c.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ca40e18d.css",
+    "static/js/main.cfe6519c.js"
+  ]
+}
